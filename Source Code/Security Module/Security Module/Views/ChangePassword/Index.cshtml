@@ -1,0 +1,55 @@
+﻿@model Security_Module.Models.ChangePassword
+
+<div class="row">
+
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <div class="well" style="width:100%; margin:0 auto;">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+            </hgroup>
+            <div style="overflow: hidden;margin:0 auto;">
+
+                @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <fieldset>
+                        <legend>Change Password</legend>
+                        <form role="form">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.UserName)
+                                @Html.TextBox("UserName", null, new { style = "width: 100%", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(m => m.UserName)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.CurrentPassword)
+                                @Html.PasswordFor(m => m.CurrentPassword, new { style = "width: 100%" })
+                                @Html.ValidationMessageFor(m => m.CurrentPassword)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.NewPassword)
+                                @Html.PasswordFor(m => m.NewPassword, new { style = "width: 100%" })
+                                @Html.ValidationMessageFor(m => m.NewPassword)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ConfirmPassword)
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { style = "width: 100%" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                            </div>
+                    
+                        </form>
+                        <input type="submit" value="Log in" class="btn-lg btn-primary" style="width:100%;" />
+                    </fieldset>
+                }
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

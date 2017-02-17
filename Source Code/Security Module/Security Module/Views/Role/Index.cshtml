@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Security_Module.Models.Role>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RoleId }) |
+                @{
+        Security_Module.Models.SecurityDbContext db = new Security_Module.Models.SecurityDbContext();
+        var Chk = db.MenuPermission.Where(x => x.RoleId == item.RoleId).FirstOrDefault();
+        if (Chk == null)
+        {
+            @Html.ActionLink("Menu Permission", "MenuPermission", new { id = item.RoleId })
+        }
+        else
+        {
+            @Html.ActionLink("Manage Permission", "ManagePermission", new { id = item.RoleId })
+        }
+
+                }
+
+            </td>
+
+        </tr>
+    }
+
+</table>

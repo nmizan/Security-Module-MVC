@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Security_Module.Models.UserRegistration>
+
+@{
+    ViewBag.Title = "WhiteList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.fullname)
+        </th>
+ 
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+
+        <th>Role</th><th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+    
+        <td>
+            @Html.DisplayFor(modelItem => item.fullname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @{ Security_Module.Models.SecurityDbContext db = new Security_Module.Models.SecurityDbContext();
+             var RoleId = db.RoleAssignUser.Where(x => x.UserId == item.UserId).Select(m => m.RoleId).FirstOrDefault();
+             var RoleName = db.Roles.Where(x => x.RoleId == RoleId).Select(y => y.RoleName).FirstOrDefault();
+             ViewBag.RName = RoleName;}
+        @Html.Display("RName")</td>
+        
+        <td>
+            @Html.ActionLink("Edit", "EditWhiteList", new { id=item.UserId })
+         
+        </td>
+    </tr>
+}
+
+</table>

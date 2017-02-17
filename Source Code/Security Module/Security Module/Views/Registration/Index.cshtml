@@ -1,0 +1,146 @@
+﻿@model Security_Module.ViewModel.RegistrationViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+      
+    
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { Id = "UserName" })
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ConfirmPassword)
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </div>
+        </div>
+
+        <div class="form-group">
+         
+                @Html.HiddenFor(model => model.Salt)
+          
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Phone, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Phone)
+                @Html.ValidationMessageFor(model => model.Phone)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address)
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SecurityQuestion, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+               
+                @Html.DropDownListFor(model => model.SecurityQuestion, new SelectList(
+                  new List<Object>{
+                       new { value = "What is your childhood name?" , text = "What is your childhood name?"},
+                       new { value = "What is your pet name?" ,       text = "What is your pet name?"    },
+                       new { value = "What is your birth place?" ,    text = "What is your birth place?" },
+                       new { value = "What is your favorite poet?" ,  text = "What is your favorite poet?" },
+                       new { value = "What is your favorite word?" ,  text = "What is your favorite word?" }
+                    },
+                  "value",
+                  "text"))
+                @Html.ValidationMessageFor(model => model.SecurityQuestion)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SecurityQuestionAnswer, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SecurityQuestionAnswer)
+                @Html.ValidationMessageFor(model => model.SecurityQuestionAnswer)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*<script type="text/jscript">
+        $('#UserName').blur(function () {
+            var url = "/Registration/CheckUserName";
+            var name = $('#UserName').val();
+            $.get(url, { input: name }, function (data) {
+                if (data == "Available") {
+                    $("#result").html("<span style='color:green'>Available</span>");
+                    $("#UserName").css('background-color', '');
+                }
+                else {
+                    $("#result").html("<span style='color:red'>Not Available</span>");
+                    $("#UserName").css('background-color', '#e97878');
+                }
+            });
+        })
+    </script>*@}

@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Method";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br /><br /><br />
+<div class="row">
+
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-5">
+
+        <div class="well" style="width:100%; margin:0 auto;">
+
+            <div style="overflow: hidden;margin:0 auto;">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <fieldset>
+                        <legend>How would you like to reset your password?</legend>
+                        <form role="form">
+                            <div class="form-group">
+                                @Html.Hidden("Email")
+                            </div>
+                            <div class="form-group">
+                                @Html.RadioButton("Option", "mail") Email me a link to reset my password
+                             
+                                
+                            </div>
+                            <div class="form-group">
+                                @Html.RadioButton("Option", "question",true) Answer security question
+                            </div>
+
+                          
+
+
+
+                        </form>
+                        <div class="pull-right">
+                            <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
+                        </div>
+                       
+                    </fieldset>
+                }
+
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "SecurityQuestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<br /><br /><br />
+<div class="row">
+
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-5">
+
+        <div class="well" style="width:100%; margin:0 auto;">
+
+            <div style="overflow: hidden;margin:0 auto;">
+
+                @using (Html.BeginForm("CheckSecurityQuestion", "PasswordRecovery", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <fieldset>
+                        <legend></legend>
+                        <form role="form">
+                            <div class="form-group">
+                                @Html.Hidden("Email")
+                            </div>
+                            <div class="form-group">
+                               <p style="font-weight:bold; font-size:20px;"> @Html.Display("Question")</p>
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBox("Answer", null, new { @style = "width: 100%" })
+                            </div>
+                         
+
+                        </form>
+                        <div class="pull-right">
+                            <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
+                        </div>
+
+                    </fieldset>
+                }
+
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+
+
